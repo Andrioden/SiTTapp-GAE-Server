@@ -1,0 +1,4 @@
+.project
+*.jar
+war/WEB-INF/classes
+*.class
