@@ -5,13 +5,59 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>Sittapp_backend</servlet-name>
-		<servlet-class>request.Sittapp_backendServlet</servlet-class>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>request.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Sittapp_backend</servlet-name>
-		<url-pattern>/sittapp_backend</url-pattern>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GangCreate</servlet-name>
+		<servlet-class>request.GangCreateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GangCreate</servlet-name>
+		<url-pattern>/gangcreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GangInvite</servlet-name>
+		<servlet-class>request.GangInviteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GangInvite</servlet-name>
+		<url-pattern>/ganginvite</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GangAccept</servlet-name>
+		<servlet-class>request.GangAcceptServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GangAccept</servlet-name>
+		<url-pattern>/gangaccept</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GangDecline</servlet-name>
+		<servlet-class>request.GangDeclineServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GangDecline</servlet-name>
+		<url-pattern>/gangdecline</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GangDetails</servlet-name>
+		<servlet-class>request.GangDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GangDetails</servlet-name>
+		<url-pattern>/gangdetails</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

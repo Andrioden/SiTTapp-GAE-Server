@@ -1,11 +1,15 @@
 package datastore;
 
 
+import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import com.google.appengine.api.datastore.Key;
+//import com.google.appengine.api.datastore.Key;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @PersistenceCapable
@@ -13,27 +17,31 @@ public class Gang {
 	// VARIABLES
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key key;
+	private Long id;
     
     @Persistent
     private String name;
     
-    @Persistent
-    private Set<Key> users;
-    
-    // CONSTRUCTOR
+	@Persistent
+	private Set<String> users = new HashSet<String>();
+	
+	// TEMPORARY VARIABLES
+	@NotPersistent
+	public ArrayList<User> userobjs;
+	
+	// CONSTRUCTOR
     public Gang(String name) {
     	this.name = name;
     }
     
 	// GETTERS AND SETTERS
     
-	public Key getKey() {
-		return key;
+	public Long getId() {
+		return id;
 	}
 
-	public void setKey(Key key) {
-		this.key = key;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -44,13 +52,34 @@ public class Gang {
 		this.name = name;
 	}
 
-	public Set<Key> getUsers() {
+	public Set<String> getUsers() {
 		return users;
 	}
     
     // OTHER METHODS
 	
-	public void addUser(Key key) {
-		users.add(key);
+	/**
+	 * This method loads and sets the necessary variables for generation
+	 * of JSON data.
+	 */
+	public void initJSONvars() {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		this.userobjs = new ArrayList<User>();
+		for (String name : this.getUsers()) {
+			User user = pm.getObjectById(User.class, name);
+			this.userobjs.add(user);
+		}
+	}
+	
+	public void addUser(String name) {
+		users.add(name);
+	}
+	
+	public String toString() {
+		String str = name +"("+ id +") - users:";
+		for (String n : users) {
+			str += " "+n;
+		}
+		return str;
 	}
 }

@@ -13,15 +13,46 @@
   </head>
 
   <body>
-    <h1>Hello App Engine!</h1>
-	
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href="sittapp_backend">Sittapp_backend</a></td>
-      </tr>
-    </table>
+    <h1>Available Servlets:</h1>
+	<ul>
+		<li><a href="login">Login</a>
+			Arguments:
+			<ul>
+				<li><b>username:</b> User's own username</li>
+			</ul>
+		</li>
+		
+		<li><a href="gangcreate">Create gang</a>
+			Arguments:
+			<ul>
+				<li><b>username:</b> User's own username</li>
+				<li><b>gangname:</b> Name on gang</li>
+			</ul>
+		</li>
+		
+		<li><a href="ganginvite">Invite to gang</a>
+			Arguments:
+			<ul>
+				<li><b>username:</b> Invited user's username</li>
+				<li><b>gangid:</b> ID of gang</li>
+			</ul>
+		</li>
+		
+		<li><a href="gangaccept">Accept gang invitation</a>
+			Arguments:
+			<ul>
+				<li><b>username:</b> User's own username</li>
+				<li><b>gangid:</b> ID of gang</li>
+			</ul>
+		</li>
+		
+		<li><a href="gangdecline">Accept gang invitation</a>
+			Arguments:
+			<ul>
+				<li><b>username:</b> User's own username</li>
+				<li><b>gangid:</b> ID of gang</li>
+			</ul>
+		</li>
+	</ul>
   </body>
 </html>
