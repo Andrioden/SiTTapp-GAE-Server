@@ -2,15 +2,13 @@ package request;
 
 import java.io.IOException;
 import java.util.logging.Logger;
-
-import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 import datastore.*;
 
 @SuppressWarnings("serial")
-public class GangInviteServlet extends HttpServlet {
-	private static final Logger log = Logger.getLogger(GangInviteServlet.class.getName());
+public class GangLeaveServlet extends HttpServlet {
+	private static final Logger log = Logger.getLogger(GangLeaveServlet.class.getName());
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -28,26 +26,19 @@ public class GangInviteServlet extends HttpServlet {
 			log.info("User name not given, aborted.");
 			return;
 		}
-		
+		User user = pm.getObjectById(User.class, userName);
+		// Leave gang
 		String jsonMessage = "";
-		try {
-			User user = pm.getObjectById(User.class, userName);
-			// Add gang invitation
-			//TODO: Check that person inviting is member of the gang.
-			if (!user.getGangInvites().contains(gang.getId())) {
-				user.addGangInvite(gang.getId());
-				log.info("Invited "+user.getName()+" to gang "+gang.getName());
-				jsonMessage = "{\"MSG\": \"OK\"}";
-			}
-			else {
-				log.info(user.getName()+" allready member of gang "+gang.getName());
-				jsonMessage = "{\"MSG\": \"MEMBER\"}";
-			}
-		} catch (JDOObjectNotFoundException e) {
-			jsonMessage = "{\"MSG\": \"ERROR\"}";
+		if (user.getGangs().contains(gang.getId())) {
+			user.leaveGang(gang.getId());
+			log.info(user.getName()+" left gang "+gang.getName());
+			jsonMessage = "{\"MSG\": \"OK\"}";
+		}
+		else {
+			log.info(user.getName()+" is not a member of gang "+gang.getName());
+			jsonMessage = "{\"MSG\": \"NOTMEMBER\"}";
 		}
 		pm.close();
 		dsutils.returnJSON(resp, jsonMessage);
-		
 	}
 }

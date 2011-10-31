@@ -84,6 +84,10 @@ public class User {
 		gangInvites.remove(id);
 	}
 	
+	public void leaveGang(Long id) {
+		gangs.remove(id);
+	}
+	
 	public String toString() {
 		String str = name+" - Invites:";
 		for (Long id : gangInvites) {
