@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Gson gson = new Gson();
 		// Fetch parameters from request
-		String loginName = req.getParameter("name");
+		String loginName = req.getParameter("username");
 		if ((loginName == "")||(loginName == null)) {
 			System.out.println("User/Login name not given, aborted.");
 			return;
